@@ -1,0 +1,86 @@
+18:26:19 **** Build of configuration Debug for project lab6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f7xx_it.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f7xx_it.d" -MT"Core/Src/stm32f7xx_it.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f7xx_it.o"
+../Core/Src/main.c:49:6: warning: built-in function 'round' declared as non-function [-Wbuiltin-declaration-mismatch]
+   49 | char round[]="a";
+      |      ^~~~~
+../Core/Src/main.c: In function 'displayNumber':
+../Core/Src/main.c:175:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  175 |  sprintf(round,"%d\r\n",x);
+      |  ^~~~~~~
+../Core/Src/main.c:175:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:29:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   28 | #include <string.h>
+  +++ |+#include <stdio.h>
+   29 | /* USER CODE END Includes */
+../Core/Src/main.c:175:18: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  175 |  sprintf(round,"%d\r\n",x);
+      |                 ~^      ~
+      |                  |      |
+      |                  int    uint32_t {aka long unsigned int}
+      |                 %ld
+../Core/Src/main.c: In function 'display':
+../Core/Src/main.c:180:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |   ^~~~~~~
+../Core/Src/main.c:180:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:180:20: warning: format '%d' expects argument of type 'int', but argument 3 has type 'long unsigned int' [-Wformat=]
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |                 ~~~^         ~~~~~~~~~~~
+      |                    |              |
+      |                    int            long unsigned int
+      |                 %02ld
+../Core/Src/main.c:180:25: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |                      ~~~^                ~~~~~~~~~~~~~~~
+      |                         |                            |
+      |                         int                          long unsigned int
+      |                      %02ld
+../Core/Src/main.c:181:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  181 |   HAL_UART_Transmit(&huart3, (uint32_t*)text,strlen(text),1000);
+      |                              ^~~~~~~~~~~~~~~
+      |                              |
+      |                              uint32_t * {aka long unsigned int *}
+In file included from ../Core/Inc/stm32f7xx_hal_conf.h:410,
+                 from ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:1531:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint32_t *' {aka 'long unsigned int *'}
+ 1531 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'displayNumber':
+../Core/Src/main.c:175:21: warning: '
+   ' directive writing 2 bytes into a region of size between 0 and 1 [-Wformat-overflow=]
+  175 |  sprintf(round,"%d\r\n",x);
+      |                   ~~^~
+../Core/Src/main.c:175:2: note: 'sprintf' output between 4 and 14 bytes into a destination of size 2
+  175 |  sprintf(round,"%d\r\n",x);
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'display':
+../Core/Src/main.c:180:21: warning: ':' directive writing 1 byte into a region of size 0 [-Wformat-overflow=]
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |                     ^
+../Core/Src/main.c:180:16: note: using the range [-2147483648, 2147483647] for directive argument
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |                ^~~~~~~~~~~~~
+../Core/Src/main.c:180:3: note: 'sprintf' output between 7 and 25 bytes into a destination of size 2
+  180 |   sprintf(text,"%02d:%02d\r",count/60000,(count/1000)%60);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "lab6.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\~Air~\STM32CubeIDE\workspace_1.7.0\lab6\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lab6.elf
+ 
+arm-none-eabi-size   lab6.elf 
+arm-none-eabi-objdump -h -S  lab6.elf  > "lab6.list"
+arm-none-eabi-objcopy  -O binary  lab6.elf  "lab6.bin"
+   text	   data	    bss	    dec	    hex	filename
+  16596	    124	   1884	  18604	   48ac	lab6.elf
+Finished building: default.size.stdout
+ 
+Finished building: lab6.bin
+ 
+Finished building: lab6.list
+ 
+
+18:26:25 Build Finished. 0 errors, 10 warnings. (took 5s.719ms)
+

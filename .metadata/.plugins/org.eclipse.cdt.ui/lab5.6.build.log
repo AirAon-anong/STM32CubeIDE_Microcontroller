@@ -1,0 +1,62 @@
+16:49:19 **** Incremental Build of configuration Debug for project lab5.6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:29: warning: passing argument 2 of 'HAL_ADC_Start_DMA' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  106 |   HAL_ADC_Start_DMA(&hadc1, adc_val, 8);
+      |                             ^~~~~~~
+In file included from ../Core/Inc/stm32f7xx_hal_conf.h:290,
+                 from ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_adc.h:632:72: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'volatile uint32_t *' {aka 'volatile long unsigned int *'}
+  632 | HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+      |                                                              ~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'displayHEX':
+../Core/Src/main.c:203:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  203 |  sprintf(output,"%08X",x);
+      |  ^~~~~~~
+../Core/Src/main.c:203:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:30:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   29 | #include <string.h>
+  +++ |+#include <stdio.h>
+   30 | /* USER CODE END Includes */
+../Core/Src/main.c:203:21: warning: format '%X' expects argument of type 'unsigned int', but argument 3 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  203 |  sprintf(output,"%08X",x);
+      |                  ~~~^  ~
+      |                     |  |
+      |                     |  uint32_t {aka long unsigned int}
+      |                     unsigned int
+      |                  %08lX
+../Core/Src/main.c:203:18: warning: '%08X' directive writing 8 bytes into a region of size 2 [-Wformat-overflow=]
+  203 |  sprintf(output,"%08X",x);
+      |                  ^~~~
+../Core/Src/main.c:203:2: note: 'sprintf' output 9 bytes into a destination of size 2
+  203 |  sprintf(output,"%08X",x);
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:215:16: warning: '%.2f' directive writing between 3 and 313 bytes into a region of size 2 [-Wformat-overflow=]
+  215 |  sprintf(vin1,"%.2f",vin);
+      |                ^~~~
+../Core/Src/main.c:215:15: note: assuming directive output of 4 bytes
+  215 |  sprintf(vin1,"%.2f",vin);
+      |               ^~~~~~
+../Core/Src/main.c:215:2: note: 'sprintf' output between 4 and 314 bytes into a destination of size 2
+  215 |  sprintf(vin1,"%.2f",vin);
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "lab5.6.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\~Air~\STM32CubeIDE\workspace_1.7.0\lab5.6\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab5.6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: lab5.6.elf
+ 
+arm-none-eabi-size   lab5.6.elf 
+arm-none-eabi-objdump -h -S  lab5.6.elf  > "lab5.6.list"
+arm-none-eabi-objcopy  -O binary  lab5.6.elf  "lab5.6.bin"
+   text	   data	    bss	    dec	    hex	filename
+  29260	    504	   1936	  31700	   7bd4	lab5.6.elf
+Finished building: default.size.stdout
+ 
+Finished building: lab5.6.bin
+ 
+Finished building: lab5.6.list
+ 
+
+16:49:27 Build Finished. 0 errors, 6 warnings. (took 8s.513ms)
+
